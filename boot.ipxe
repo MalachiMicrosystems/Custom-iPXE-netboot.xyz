@@ -1,1 +1,19 @@
 #!ipxe
+
+:menu
+menu This is a custom iPXE Menu, you may return to normal netboot.xyz at the bottom
+item --gap Linux
+item xcp-ng ${space} XCP-ng
+#item --gap Other
+#item netboot ${space} Return to netboot.xyz
+
+:xcp-ng
+kernel https://boot.netboot.xyz/memdisk raw iso
+initrd https://updates.xcp-ng.org/isos/8.2/xcp-ng-8.2.0-netinstall.iso
+boot || goto custom_exit
+
+
+
+:custom_exit
+chain utils.ipxe
+exit
